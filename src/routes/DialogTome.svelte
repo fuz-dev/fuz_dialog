@@ -2,7 +2,7 @@
 	import {slide} from 'svelte/transition';
 	import {writable} from 'svelte/store';
 	import Alert from '@fuz.dev/fuz_library/Alert.svelte';
-	import LibraryItem from '@fuz.dev/fuz_library/TomeDetails.svelte';
+	import TomeDetails from '@fuz.dev/fuz_library/TomeDetails.svelte';
 	import {get_tome} from '@fuz.dev/fuz_library/tome.js';
 	// TODO hack why is this needed? it's imported in the `Code` component
 	// but it needs to be imported before the next line,
@@ -24,12 +24,12 @@
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let dialog_open = false;
-	let dialog_overflowing_open = false;
-	let dialog_layout_page_open = false;
-	let dialog_nested_1_open = false;
-	let dialog_nested_2_open = false;
-	let dialog_nested_3_open = false;
+	let opened = false;
+	let dialog_overflowing_opened = false;
+	let dialog_layout_page_opened = false;
+	let dialog_nested_1_opened = false;
+	let dialog_nested_2_opened = false;
+	let dialog_nested_3_opened = false;
 
 	let selected_layout: DialogLayout = 'page';
 	const layouts: DialogLayout[] = ['centered', 'page'];
@@ -58,16 +58,17 @@
 	};
 </script>
 
-<LibraryItem {tome}>
+<TomeDetails {tome}>
+	<div slot="header"><h2>{tome.name}</h2></div>
 	<div class="prose box width_full">
 		<Code
-			content={`<button on:click={() => (dialog_open = true)}>
+			content={`<button on:click={() => (opened = true)}>
 	open a dialog
 </button>
-{#if dialog_open}
+{#if opened}
 	<Dialog
 		let:close
-		on:close={() => (dialog_open = false)}
+		on:close={() => (opened = false)}
 	>
 		<div class="pane prose padded_xl box">
 			<h1>attention</h1>
@@ -77,27 +78,27 @@
 	</Dialog>
 {/if}`}
 		/>
-		<button on:click={() => (dialog_open = true)}> open a dialog </button>
+		<button on:click={() => (opened = true)}> open a dialog </button>
 		<hr />
-		<button on:click={() => (dialog_overflowing_open = true)}
+		<button on:click={() => (dialog_overflowing_opened = true)}
 			>open a dialog that overflows vertically</button
 		>
 		<hr />
-		<button on:click={() => (dialog_layout_page_open = true)}
+		<button on:click={() => (dialog_layout_page_opened = true)}
 			>open a dialog with <code>layout="page"</code> instead of the default
 			<code>layout='centered'</code></button
 		>
 		<hr />
-		<button on:click={() => (dialog_nested_1_open = true)}
+		<button on:click={() => (dialog_nested_1_opened = true)}
 			>open a dialog containing another dialog</button
 		>
 		<hr />
 		<button on:click={() => add_dialogs(5)}>open many dialogs</button>
 		<hr />
 	</div>
-</LibraryItem>
-{#if dialog_open}
-	<Dialog let:close on:close={() => (dialog_open = false)}>
+</TomeDetails>
+{#if opened}
+	<Dialog let:close on:close={() => (opened = false)}>
 		<div class="pane prose padded_xl box">
 			<h1>attention</h1>
 			<p>this is a dialog</p>
@@ -105,8 +106,8 @@
 		</div>
 	</Dialog>
 {/if}
-{#if dialog_overflowing_open}
-	<Dialog let:close on:close={() => (dialog_overflowing_open = false)}>
+{#if dialog_overflowing_opened}
+	<Dialog let:close on:close={() => (dialog_overflowing_opened = false)}>
 		<div class="pane prose padded_xl">
 			<h1>attention</h1>
 			{#each {length: 120} as _}
@@ -116,9 +117,9 @@
 		</div>
 	</Dialog>
 {/if}
-{#if dialog_layout_page_open}
+{#if dialog_layout_page_opened}
 	<Dialog
-		on:close={() => ((dialog_layout_page_open = false), reset_items())}
+		on:close={() => ((dialog_layout_page_opened = false), reset_items())}
 		let:close
 		layout={selected_layout}
 	>
@@ -184,36 +185,36 @@
 		</div>
 	</Dialog>
 {/if}
-{#if dialog_nested_1_open}
-	<Dialog on:close={() => (dialog_nested_1_open = false)}>
+{#if dialog_nested_1_opened}
+	<Dialog on:close={() => (dialog_nested_1_opened = false)}>
 		<div class="pane prose padded_xl">
 			<h1>dialog 1</h1>
 			<p>dialogs can open more dialogs</p>
-			<button on:click={() => (dialog_nested_2_open = true)}>open another dialog</button>
+			<button on:click={() => (dialog_nested_2_opened = true)}>open another dialog</button>
 		</div>
 	</Dialog>
 {/if}
-{#if dialog_nested_2_open}
-	<Dialog on:close={() => (dialog_nested_2_open = false)}>
+{#if dialog_nested_2_opened}
+	<Dialog on:close={() => (dialog_nested_2_opened = false)}>
 		<div class="pane prose padded_xl">
 			<h1>dialog 2</h1>
 			<p>this dialog can open more dialogs</p>
 			<p>this is the second dialog</p>
-			<button on:click={() => (dialog_nested_3_open = true)}>open another dialog</button>
+			<button on:click={() => (dialog_nested_3_opened = true)}>open another dialog</button>
 		</div>
 	</Dialog>
 {/if}
-{#if dialog_nested_3_open}
-	<Dialog on:close={() => (dialog_nested_3_open = false)}>
+{#if dialog_nested_3_opened}
+	<Dialog on:close={() => (dialog_nested_3_opened = false)}>
 		<div class="pane prose padded_xl" style:margin-bottom="var(--spacing_xl3)">
 			<h1>3 dialogs!</h1>
-			<button on:click={() => (dialog_nested_3_open = false)}>close dialog</button>
+			<button on:click={() => (dialog_nested_3_opened = false)}>close dialog</button>
 		</div>
 		<div class="pane prose padded_xl">
 			<h1>and another <code>.pane</code></h1>
 			<button
 				on:click={() => {
-					dialog_nested_1_open = dialog_nested_2_open = dialog_nested_3_open = false;
+					dialog_nested_1_opened = dialog_nested_2_opened = dialog_nested_3_opened = false;
 				}}>close all dialogs</button
 			>
 		</div>

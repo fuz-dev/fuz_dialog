@@ -1,6 +1,5 @@
 <script lang="ts">
 	import {createEventDispatcher, onDestroy} from 'svelte';
-	import {browser} from '$app/environment'; // TODO remove this dep
 	import {is_editable, swallow} from '@grogarden/util/dom.js';
 	import Teleport from '@fuz.dev/fuz_library/Teleport.svelte';
 
@@ -32,7 +31,7 @@
 	export let active = true;
 
 	let container_el: HTMLElement | undefined;
-	$: browser && update_container_el(container);
+	$: !import.meta.env.SSR && update_container_el(container); // TODO guard some other way
 
 	const update_container_el = (container: HTMLElement | undefined): void => {
 		if (container) {
