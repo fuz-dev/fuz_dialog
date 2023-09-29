@@ -2,6 +2,7 @@
 	import {slide} from 'svelte/transition';
 	import {writable} from 'svelte/store';
 	import Alert from '@fuz.dev/fuz_library/Alert.svelte';
+	import 'prismjs'; // TODO why is this needed?
 	import Code from '@fuz.dev/fuz_code/Code.svelte';
 	import LibraryItem from '@fuz.dev/fuz_library/TomeDetails.svelte';
 	import {get_tome} from '@fuz.dev/fuz_library/tome.js';
@@ -78,14 +79,18 @@
 		<button on:click={() => (dialog_overflowing_open = true)}
 			>open a dialog that overflows vertically</button
 		>
+		<hr />
 		<button on:click={() => (dialog_layout_page_open = true)}
 			>open a dialog with <code>layout="page"</code> instead of the default
 			<code>layout='centered'</code></button
 		>
+		<hr />
 		<button on:click={() => (dialog_nested_1_open = true)}
 			>open a dialog containing another dialog</button
 		>
+		<hr />
 		<button on:click={() => add_dialogs(5)}>open many dialogs</button>
+		<hr />
 	</div>
 </LibraryItem>
 {#if dialog_open}
