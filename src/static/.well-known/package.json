@@ -2,6 +2,7 @@
   "name": "@fuz.dev/fuz_dialog",
   "description": "dialog component for Svelte with Fuz",
   "version": "0.0.1",
+  "license": "MIT",
   "type": "module",
   "homepage": "https://dialog.fuz.dev/",
   "repository": "https://github.com/fuz-dev/fuz_dialog",
@@ -21,7 +22,7 @@
   "devDependencies": {
     "@feltjs/eslint-config": "^0.4.0",
     "@fuz.dev/fuz": "^0.69.1",
-    "@fuz.dev/fuz_library": "^0.1.0",
+    "@fuz.dev/fuz_library": "^0.2.1",
     "@grogarden/gro": "^0.92.0",
     "@grogarden/util": "^0.15.0",
     "@sveltejs/adapter-static": "^2.0.3",
@@ -60,11 +61,5 @@
         }
       }
     ]
-  },
-  "exports": {
-    "./example.js": {
-      "default": "./dist/example.js",
-      "types": "./dist/example.d.ts"
-    }
   }
 }
