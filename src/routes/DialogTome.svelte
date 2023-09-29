@@ -1,0 +1,231 @@
+<script lang="ts">
+	import {slide} from 'svelte/transition';
+	import {writable} from 'svelte/store';
+	import Alert from '@fuz.dev/fuz_library/Alert.svelte';
+	import LibraryItem from '@fuz.dev/fuz_library/TomeDetails.svelte';
+	import {get_tome} from '@fuz.dev/fuz_library/tome.js';
+	// TODO hack why is this needed? it's imported in the `Code` component
+	// but it needs to be imported before the next line,
+	// but only in this project and not `fuz_library`??
+	import 'prismjs';
+	import Code from '@fuz.dev/fuz_code/Code.svelte';
+
+	import Dialog from '$lib/Dialog.svelte';
+	import Dialogs from '$lib/Dialogs.svelte';
+	import {
+		dialog_layouts,
+		type DialogParams,
+		type DialogLayout,
+		to_dialog_params,
+	} from '$lib/dialog';
+	import Text from '$routes/Text.svelte';
+
+	const LIBRARY_ITEM_NAME = 'Dialog';
+
+	const tome = get_tome(LIBRARY_ITEM_NAME);
+
+	let dialog_open = false;
+	let dialog_overflowing_open = false;
+	let dialog_layout_page_open = false;
+	let dialog_nested_1_open = false;
+	let dialog_nested_2_open = false;
+	let dialog_nested_3_open = false;
+
+	let selected_layout: DialogLayout = 'page';
+	const layouts: DialogLayout[] = ['centered', 'page'];
+
+	let items: object[] = [];
+	const remove_item = (item: object) => {
+		items = items.filter((i) => i !== item);
+	};
+	const add_item = () => {
+		items = items.concat({});
+	};
+	const reset_items = () => {
+		items = [];
+	};
+
+	const dialogs = writable([] as DialogParams[]);
+	const add_dialogs = (count: number) => {
+		const to_text = (index: number) => '!'.repeat(count * 3 - index * 3);
+		$dialogs = Array.from({length: count}, (_, i) =>
+			to_dialog_params(Text, {
+				text: to_text(i),
+				fontSize: 'var(--size_xl4)',
+				padding: 'var(--spacing_sm) var(--spacing_lg)',
+			}),
+		);
+	};
+</script>
+
+<LibraryItem {tome}>
+	<div class="prose box width_full">
+		<Code
+			content={`<button on:click={() => (dialog_open = true)}>
+	open a dialog
+</button>
+{#if dialog_open}
+	<Dialog
+		let:close
+		on:close={() => (dialog_open = false)}
+	>
+		<div class="pane prose padded_xl box">
+			<h1>attention</h1>
+			<p>this is a dialog</p>
+			<button on:click={close}> ok </button>
+		</div>
+	</Dialog>
+{/if}`}
+		/>
+		<button on:click={() => (dialog_open = true)}> open a dialog </button>
+		<hr />
+		<button on:click={() => (dialog_overflowing_open = true)}
+			>open a dialog that overflows vertically</button
+		>
+		<hr />
+		<button on:click={() => (dialog_layout_page_open = true)}
+			>open a dialog with <code>layout="page"</code> instead of the default
+			<code>layout='centered'</code></button
+		>
+		<hr />
+		<button on:click={() => (dialog_nested_1_open = true)}
+			>open a dialog containing another dialog</button
+		>
+		<hr />
+		<button on:click={() => add_dialogs(5)}>open many dialogs</button>
+		<hr />
+	</div>
+</LibraryItem>
+{#if dialog_open}
+	<Dialog let:close on:close={() => (dialog_open = false)}>
+		<div class="pane prose padded_xl box">
+			<h1>attention</h1>
+			<p>this is a dialog</p>
+			<button on:click={close}> ok </button>
+		</div>
+	</Dialog>
+{/if}
+{#if dialog_overflowing_open}
+	<Dialog let:close on:close={() => (dialog_overflowing_open = false)}>
+		<div class="pane prose padded_xl">
+			<h1>attention</h1>
+			{#each {length: 120} as _}
+				<p>this is a dialog that overflows vertically</p>
+			{/each}
+			<button on:click={close}> close </button>
+		</div>
+	</Dialog>
+{/if}
+{#if dialog_layout_page_open}
+	<Dialog
+		on:close={() => ((dialog_layout_page_open = false), reset_items())}
+		let:close
+		layout={selected_layout}
+	>
+		<div class="pane prose padded_xl width_md">
+			<h1>attention</h1>
+			{#if selected_layout === 'page'}
+				<p>
+					This is a <code>Dialog</code> with
+					<code
+						>layout="<select class="inline" bind:value={selected_layout}
+							>{#each dialog_layouts as layout}
+								<option value={layout}>{layout}</option>
+							{/each}
+						</select>"</code
+					>.
+				</p>
+				<p>
+					Instead of being centered by default, the dialog's contents are aligned to the top of the
+					page and grow downward. It's useful when the dialog's contents change in height.
+				</p>
+			{:else if selected_layout === 'centered'}
+				<p>
+					This is a <code>Dialog</code> with
+					<code
+						>layout="<select class="inline" bind:value={selected_layout}
+							>{#each dialog_layouts as layout}
+								<option value={layout}>{layout}</option>
+							{/each}
+						</select>"</code
+					>, the default value.
+				</p>
+				<p>
+					It's often the best choice, but it can be undesirable in some situations, like when the
+					height of the content changes as the user does things, leading to a janky experience.
+				</p>
+			{:else}
+				<Alert status="error">eek a bug! unknown layout "{selected_layout}"</Alert>
+			{/if}
+			<p>
+				<button class="inline" on:click={() => add_item()}>add item</button>
+				<button class="inline" disabled={!items.length} on:click={() => reset_items()}
+					>remove all</button
+				>
+			</p>
+			{#each items as item (item)}
+				<p transition:slide>
+					<button class="inline" on:click={() => remove_item(item)}>✕</button>
+					new stuff appears {#if selected_layout === 'page'}gracefully{:else if selected_layout === 'centered'}ungracefully{/if}
+				</p>
+			{/each}
+			<hr />
+			<form class="box">
+				<div>
+					{#each layouts as layout}
+						<label class="row">
+							<input type="radio" bind:group={selected_layout} value={layout} />
+							{layout}
+						</label>
+					{/each}
+				</div>
+				<button type="button" on:click={close}> close </button>
+			</form>
+		</div>
+	</Dialog>
+{/if}
+{#if dialog_nested_1_open}
+	<Dialog on:close={() => (dialog_nested_1_open = false)}>
+		<div class="pane prose padded_xl">
+			<h1>dialog 1</h1>
+			<p>dialogs can open more dialogs</p>
+			<button on:click={() => (dialog_nested_2_open = true)}>open another dialog</button>
+		</div>
+	</Dialog>
+{/if}
+{#if dialog_nested_2_open}
+	<Dialog on:close={() => (dialog_nested_2_open = false)}>
+		<div class="pane prose padded_xl">
+			<h1>dialog 2</h1>
+			<p>this dialog can open more dialogs</p>
+			<p>this is the second dialog</p>
+			<button on:click={() => (dialog_nested_3_open = true)}>open another dialog</button>
+		</div>
+	</Dialog>
+{/if}
+{#if dialog_nested_3_open}
+	<Dialog on:close={() => (dialog_nested_3_open = false)}>
+		<div class="pane prose padded_xl" style:margin-bottom="var(--spacing_xl3)">
+			<h1>3 dialogs!</h1>
+			<button on:click={() => (dialog_nested_3_open = false)}>close dialog</button>
+		</div>
+		<div class="pane prose padded_xl">
+			<h1>and another <code>.pane</code></h1>
+			<button
+				on:click={() => {
+					dialog_nested_1_open = dialog_nested_2_open = dialog_nested_3_open = false;
+				}}>close all dialogs</button
+			>
+		</div>
+	</Dialog>
+{/if}
+<Dialogs
+	{dialogs}
+	on:close={() => {
+		$dialogs = $dialogs.slice(0, -1);
+	}}
+	let:dialog
+	><div class="pane">
+		<svelte:component this={dialog.Component} {...dialog.props} />
+	</div>
+</Dialogs>

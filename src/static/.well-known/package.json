@@ -2,6 +2,7 @@
   "name": "@fuz.dev/fuz_dialog",
   "description": "dialog component for Svelte with Fuz",
   "version": "0.0.1",
+  "license": "MIT",
   "type": "module",
   "homepage": "https://dialog.fuz.dev/",
   "repository": "https://github.com/fuz-dev/fuz_dialog",
@@ -19,9 +20,11 @@
     "dist"
   ],
   "devDependencies": {
+    "@changesets/changelog-git": "^0.1.14",
     "@feltjs/eslint-config": "^0.4.0",
     "@fuz.dev/fuz": "^0.69.1",
-    "@fuz.dev/fuz_library": "^0.1.0",
+    "@fuz.dev/fuz_code": "^0.2.0",
+    "@fuz.dev/fuz_library": "^0.2.1",
     "@grogarden/gro": "^0.92.0",
     "@grogarden/util": "^0.15.0",
     "@sveltejs/adapter-static": "^2.0.3",
@@ -33,6 +36,8 @@
     "eslint-plugin-svelte": "^2.33.2",
     "prettier": "^3.0.3",
     "prettier-plugin-svelte": "^3.0.3",
+    "prism-svelte": "^0.5.0",
+    "prismjs": "^1.29.0",
     "svelte": "^4.2.1",
     "svelte-check": "^3.5.2",
     "svelte-preprocess-esbuild": "^3.0.1",
@@ -62,9 +67,17 @@
     ]
   },
   "exports": {
-    "./example.js": {
-      "default": "./dist/example.js",
-      "types": "./dist/example.d.ts"
+    "./Dialog.svelte": {
+      "svelte": "./dist/Dialog.svelte",
+      "types": "./dist/Dialog.svelte.d.ts"
+    },
+    "./dialog.js": {
+      "default": "./dist/dialog.js",
+      "types": "./dist/dialog.d.ts"
+    },
+    "./Dialogs.svelte": {
+      "svelte": "./dist/Dialogs.svelte",
+      "types": "./dist/Dialogs.svelte.d.ts"
     }
   }
 }
