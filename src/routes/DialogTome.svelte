@@ -2,7 +2,7 @@
 	import {slide} from 'svelte/transition';
 	import {writable} from 'svelte/store';
 	import Alert from '@fuz.dev/fuz_library/Alert.svelte';
-	import 'prismjs'; // TODO why is this needed?
+	import 'prismjs'; // TODO hack why is this needed?
 	import Code from '@fuz.dev/fuz_code/Code.svelte';
 	import LibraryItem from '@fuz.dev/fuz_library/TomeDetails.svelte';
 	import {get_tome} from '@fuz.dev/fuz_library/tome.js';
