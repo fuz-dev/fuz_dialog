@@ -15,8 +15,7 @@
 			<span slot="icon"
 				>{#if mreows}{mreows[0].icon}{:else}✨{/if}</span
 			><span
-				>hello, welcome to <a href="https://github.com/fuz-dev/fuz_template"
-					>@fuz.dev/fuz_template</a
+				>hello, welcome to <a href="https://github.com/fuz-dev/fuz_dialog">@fuz.dev/fuz_dialog</a
 				></span
 			>
 		</Alert>

@@ -1,11 +1,10 @@
 {
-  "name": "@fuz.dev/fuz_template",
-  "private": true,
-  "description": "a static web app and Node library template with TypeScript, Svelte, SvelteKit, Vite, esbuild, Fuz, and Gro",
+  "name": "@fuz.dev/fuz_dialog",
+  "description": "dialog component for Svelte with Fuz",
   "version": "0.0.1",
   "type": "module",
-  "homepage": "https://template.fuz.dev/",
-  "repository": "https://github.com/fuz-dev/fuz_template",
+  "homepage": "https://dialog.fuz.dev/",
+  "repository": "https://github.com/fuz-dev/fuz_dialog",
   "engines": {
     "node": ">=20.7"
   },
@@ -61,5 +60,11 @@
         }
       }
     ]
+  },
+  "exports": {
+    "./example.js": {
+      "default": "./dist/example.js",
+      "types": "./dist/example.d.ts"
+    }
   }
 }
