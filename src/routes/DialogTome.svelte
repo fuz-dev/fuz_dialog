@@ -4,7 +4,10 @@
 	import Alert from '@fuz.dev/fuz_library/Alert.svelte';
 	import LibraryItem from '@fuz.dev/fuz_library/TomeDetails.svelte';
 	import {get_tome} from '@fuz.dev/fuz_library/tome.js';
-	import 'prismjs'; // TODO hack why is this needed? isn't in another project - needs to go before Code
+	// TODO hack why is this needed? it's imported in the `Code` component
+	// but it needs to be imported before the next line,
+	// but only in this project and not `fuz_library`??
+	import 'prismjs';
 	import Code from '@fuz.dev/fuz_code/Code.svelte';
 
 	import Dialog from '$lib/Dialog.svelte';
