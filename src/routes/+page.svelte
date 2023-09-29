@@ -4,6 +4,12 @@
 
 	import DialogTome from '$routes/DialogTome.svelte';
 
+	import {set_tomes} from '@fuz.dev/fuz_library/tome.js';
+
+	import {tomes} from '$routes/tomes.js';
+
+	set_tomes(new Map(tomes.map((t) => [t.name, t])));
+
 	const pkg_npm_url = 'https://npmjs.com/package/@fuz.dev/fuz_dialog';
 	const pkg_name = '@fuz.dev/fuz_dialog';
 	const pkg_repo_url = 'https://github.com/fuz-dev/fuz_dialog';
