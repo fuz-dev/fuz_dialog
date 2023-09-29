@@ -20,21 +20,21 @@
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let dialogOpen = false;
-	let dialogOverflowingOpen = false;
-	let dialogLayoutPageOpen = false;
-	let dialogNested1Open = false;
-	let dialogNested2Open = false;
-	let dialogNested3Open = false;
+	let dialog_open = false;
+	let dialog_overflowing_open = false;
+	let dialog_layout_page_open = false;
+	let dialog_nested_1_open = false;
+	let dialog_nested_2_open = false;
+	let dialog_nested_3_open = false;
 
-	let selectedLayout: DialogLayout = 'page';
+	let selected_layout: DialogLayout = 'page';
 	const layouts: DialogLayout[] = ['centered', 'page'];
 
 	let items: object[] = [];
-	const removeItem = (item: object) => {
+	const remove_item = (item: object) => {
 		items = items.filter((i) => i !== item);
 	};
-	const addItem = () => {
+	const add_item = () => {
 		items = items.concat({});
 	};
 	const reset_items = () => {
@@ -42,11 +42,11 @@
 	};
 
 	const dialogs = writable([] as DialogParams[]);
-	const addDialogs = (count: number) => {
-		const toText = (index: number) => '!'.repeat(count * 3 - index * 3);
+	const add_dialogs = (count: number) => {
+		const to_text = (index: number) => '!'.repeat(count * 3 - index * 3);
 		$dialogs = Array.from({length: count}, (_, i) =>
 			to_dialog_params(Text, {
-				text: toText(i),
+				text: to_text(i),
 				fontSize: 'var(--size_xl4)',
 				padding: 'var(--spacing_sm) var(--spacing_lg)',
 			}),
@@ -57,13 +57,13 @@
 <LibraryItem {tome}>
 	<div class="prose box width_full">
 		<Code
-			content={`<button on:click={() => (dialogOpen = true)}>
+			content={`<button on:click={() => (dialog_open = true)}>
 	open a dialog
 </button>
-{#if dialogOpen}
+{#if dialog_open}
 	<Dialog
 		let:close
-		on:close={() => (dialogOpen = false)}
+		on:close={() => (dialog_open = false)}
 	>
 		<div class="pane prose padded_xl box">
 			<h1>attention</h1>
@@ -73,23 +73,23 @@
 	</Dialog>
 {/if}`}
 		/>
-		<button on:click={() => (dialogOpen = true)}> open a dialog </button>
+		<button on:click={() => (dialog_open = true)}> open a dialog </button>
 		<hr />
-		<button on:click={() => (dialogOverflowingOpen = true)}
+		<button on:click={() => (dialog_overflowing_open = true)}
 			>open a dialog that overflows vertically</button
 		>
-		<button on:click={() => (dialogLayoutPageOpen = true)}
+		<button on:click={() => (dialog_layout_page_open = true)}
 			>open a dialog with <code>layout="page"</code> instead of the default
 			<code>layout='centered'</code></button
 		>
-		<button on:click={() => (dialogNested1Open = true)}
+		<button on:click={() => (dialog_nested_1_open = true)}
 			>open a dialog containing another dialog</button
 		>
-		<button on:click={() => addDialogs(5)}>open many dialogs</button>
+		<button on:click={() => add_dialogs(5)}>open many dialogs</button>
 	</div>
 </LibraryItem>
-{#if dialogOpen}
-	<Dialog let:close on:close={() => (dialogOpen = false)}>
+{#if dialog_open}
+	<Dialog let:close on:close={() => (dialog_open = false)}>
 		<div class="pane prose padded_xl box">
 			<h1>attention</h1>
 			<p>this is a dialog</p>
@@ -97,8 +97,8 @@
 		</div>
 	</Dialog>
 {/if}
-{#if dialogOverflowingOpen}
-	<Dialog let:close on:close={() => (dialogOverflowingOpen = false)}>
+{#if dialog_overflowing_open}
+	<Dialog let:close on:close={() => (dialog_overflowing_open = false)}>
 		<div class="pane prose padded_xl">
 			<h1>attention</h1>
 			{#each {length: 120} as _}
@@ -108,19 +108,19 @@
 		</div>
 	</Dialog>
 {/if}
-{#if dialogLayoutPageOpen}
+{#if dialog_layout_page_open}
 	<Dialog
-		on:close={() => ((dialogLayoutPageOpen = false), reset_items())}
+		on:close={() => ((dialog_layout_page_open = false), reset_items())}
 		let:close
-		layout={selectedLayout}
+		layout={selected_layout}
 	>
 		<div class="pane prose padded_xl width_md">
 			<h1>attention</h1>
-			{#if selectedLayout === 'page'}
+			{#if selected_layout === 'page'}
 				<p>
 					This is a <code>Dialog</code> with
 					<code
-						>layout="<select class="inline" bind:value={selectedLayout}
+						>layout="<select class="inline" bind:value={selected_layout}
 							>{#each dialog_layouts as layout}
 								<option value={layout}>{layout}</option>
 							{/each}
@@ -131,11 +131,11 @@
 					Instead of being centered by default, the dialog's contents are aligned to the top of the
 					page and grow downward. It's useful when the dialog's contents change in height.
 				</p>
-			{:else if selectedLayout === 'centered'}
+			{:else if selected_layout === 'centered'}
 				<p>
 					This is a <code>Dialog</code> with
 					<code
-						>layout="<select class="inline" bind:value={selectedLayout}
+						>layout="<select class="inline" bind:value={selected_layout}
 							>{#each dialog_layouts as layout}
 								<option value={layout}>{layout}</option>
 							{/each}
@@ -147,18 +147,18 @@
 					height of the content changes as the user does things, leading to a janky experience.
 				</p>
 			{:else}
-				<Alert status="error">eek a bug! unknown layout "{selectedLayout}"</Alert>
+				<Alert status="error">eek a bug! unknown layout "{selected_layout}"</Alert>
 			{/if}
 			<p>
-				<button class="inline" on:click={() => addItem()}>add item</button>
+				<button class="inline" on:click={() => add_item()}>add item</button>
 				<button class="inline" disabled={!items.length} on:click={() => reset_items()}
 					>remove all</button
 				>
 			</p>
 			{#each items as item (item)}
 				<p transition:slide>
-					<button class="inline" on:click={() => removeItem(item)}>✕</button>
-					new stuff appears {#if selectedLayout === 'page'}gracefully{:else if selectedLayout === 'centered'}ungracefully{/if}
+					<button class="inline" on:click={() => remove_item(item)}>✕</button>
+					new stuff appears {#if selected_layout === 'page'}gracefully{:else if selected_layout === 'centered'}ungracefully{/if}
 				</p>
 			{/each}
 			<hr />
@@ -166,7 +166,7 @@
 				<div>
 					{#each layouts as layout}
 						<label class="row">
-							<input type="radio" bind:group={selectedLayout} value={layout} />
+							<input type="radio" bind:group={selected_layout} value={layout} />
 							{layout}
 						</label>
 					{/each}
@@ -176,36 +176,36 @@
 		</div>
 	</Dialog>
 {/if}
-{#if dialogNested1Open}
-	<Dialog on:close={() => (dialogNested1Open = false)}>
+{#if dialog_nested_1_open}
+	<Dialog on:close={() => (dialog_nested_1_open = false)}>
 		<div class="pane prose padded_xl">
 			<h1>dialog 1</h1>
 			<p>dialogs can open more dialogs</p>
-			<button on:click={() => (dialogNested2Open = true)}>open another dialog</button>
+			<button on:click={() => (dialog_nested_2_open = true)}>open another dialog</button>
 		</div>
 	</Dialog>
 {/if}
-{#if dialogNested2Open}
-	<Dialog on:close={() => (dialogNested2Open = false)}>
+{#if dialog_nested_2_open}
+	<Dialog on:close={() => (dialog_nested_2_open = false)}>
 		<div class="pane prose padded_xl">
 			<h1>dialog 2</h1>
 			<p>this dialog can open more dialogs</p>
 			<p>this is the second dialog</p>
-			<button on:click={() => (dialogNested3Open = true)}>open another dialog</button>
+			<button on:click={() => (dialog_nested_3_open = true)}>open another dialog</button>
 		</div>
 	</Dialog>
 {/if}
-{#if dialogNested3Open}
-	<Dialog on:close={() => (dialogNested3Open = false)}>
+{#if dialog_nested_3_open}
+	<Dialog on:close={() => (dialog_nested_3_open = false)}>
 		<div class="pane prose padded_xl" style:margin-bottom="var(--spacing_xl3)">
 			<h1>3 dialogs!</h1>
-			<button on:click={() => (dialogNested3Open = false)}>close dialog</button>
+			<button on:click={() => (dialog_nested_3_open = false)}>close dialog</button>
 		</div>
 		<div class="pane prose padded_xl">
 			<h1>and another <code>.pane</code></h1>
 			<button
 				on:click={() => {
-					dialogNested1Open = dialogNested2Open = dialogNested3Open = false;
+					dialog_nested_1_open = dialog_nested_2_open = dialog_nested_3_open = false;
 				}}>close all dialogs</button
 			>
 		</div>
