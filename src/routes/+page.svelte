@@ -30,8 +30,12 @@
 </main>
 
 <style>
+	main {
+		margin-bottom: var(--spacing_xl5);
+	}
 	section {
-		padding: var(--spacing_xl2);
+		margin-top: var(--spacing_xl3);
+		margin-bottom: var(--spacing_xl3);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
