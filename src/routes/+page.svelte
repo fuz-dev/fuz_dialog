@@ -6,20 +6,20 @@
 
 	import DialogTome from '$routes/DialogTome.svelte';
 	import {tomes} from '$routes/tomes.js';
-	import package_json from '../static/.well-known/package.json'; // TODO SvelteKit warning
+
+	// TODO SvelteKit warns about this but we put `/static` in `/src` because of what it's saying,
+	/// maybe change to import as the first item from `packages`
+	import package_json from '../static/.well-known/package.json';
+	const pkg = parse_package_meta(package_json.homepage, package_json);
 
 	set_tomes(new Map(tomes.map((t) => [t.name, t])));
-
-	const pkg = parse_package_meta(package_json.homepage, package_json);
 </script>
 
-<main class="box">
-	<div class="width_md">
-		<div class="box">
-			<section>
-				<LibraryHeader {pkg} />
-			</section>
-		</div>
+<main class="width_full box">
+	<div class="width_md box">
+		<section class="box">
+			<LibraryHeader {pkg} />
+		</section>
 		<section>
 			<DialogTome />
 		</section>
