@@ -15,9 +15,9 @@
 	set_tomes(new Map(tomes.map((t) => [t.name, t])));
 </script>
 
-<main class="width_full box">
-	<div class="width_md box">
-		<section class="box">
+<main class="box width_full">
+	<div class="box width_md">
+		<section>
 			<LibraryHeader {pkg} />
 		</section>
 		<section>
