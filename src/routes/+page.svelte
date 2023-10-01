@@ -1,40 +1,30 @@
 <script lang="ts">
 	import LibraryHeader from '@fuz.dev/fuz_library/LibraryHeader.svelte';
 	import LibraryFooter from '@fuz.dev/fuz_library/LibraryFooter.svelte';
+	import {set_tomes} from '@fuz.dev/fuz_library/tome.js';
+	import {parse_package_meta} from '@fuz.dev/fuz_library/package.js';
 
 	import DialogTome from '$routes/DialogTome.svelte';
-
-	import {set_tomes} from '@fuz.dev/fuz_library/tome.js';
-
 	import {tomes} from '$routes/tomes.js';
+	import package_json from '../static/.well-known/package.json'; // TODO SvelteKit warning
 
 	set_tomes(new Map(tomes.map((t) => [t.name, t])));
 
-	const pkg_npm_url = 'https://npmjs.com/package/@fuz.dev/fuz_dialog';
-	const pkg_name = '@fuz.dev/fuz_dialog';
-	const pkg_repo_url = 'https://github.com/fuz-dev/fuz_dialog';
-	const pkg_org_url = 'https://github.com/fuz-dev';
-	const pkg_website_url = 'https://www.fuz.dev/';
-	const pkg_website_name = 'fuz.dev';
+	const pkg = parse_package_meta(package_json.homepage, package_json);
 </script>
 
 <main class="box">
 	<div class="width_md">
-		<section class="prose">
-			<!-- TODO move to `LibraryHeader` and make responsive -->
-			<h1>@fuz.dev/fuz_dialog</h1>
-			<blockquote>dialog component for Svelte with Fuz</blockquote>
-		</section>
 		<div class="box">
 			<section>
-				<LibraryHeader {pkg_npm_url} {pkg_name} {pkg_repo_url} />
+				<LibraryHeader {pkg} />
 			</section>
 		</div>
 		<section>
 			<DialogTome />
 		</section>
 		<section>
-			<LibraryFooter {pkg_repo_url} {pkg_org_url} {pkg_website_url} {pkg_website_name} />
+			<LibraryFooter {pkg} root_url="https://www.fuz.dev/" />
 		</section>
 	</div>
 </main>
