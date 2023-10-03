@@ -51,7 +51,7 @@
 		$dialogs = Array.from({length: count}, (_, i) =>
 			to_dialog_params(Text, {
 				text: to_text(i),
-				fontSize: 'var(--size_xl4)',
+				fontSize: 'var(--size_4)',
 				padding: 'var(--spacing_sm) var(--spacing_lg)',
 			}),
 		);
@@ -70,7 +70,7 @@
 		let:close
 		on:close={() => (opened = false)}
 	>
-		<div class="pane prose padded_xl box">
+		<div class="pane prose padded_1 box">
 			<h1>attention</h1>
 			<p>this is a dialog</p>
 			<button on:click={close}> ok </button>
@@ -99,7 +99,7 @@
 </TomeDetails>
 {#if opened}
 	<Dialog let:close on:close={() => (opened = false)}>
-		<div class="pane prose padded_xl box">
+		<div class="pane prose padded_1 box">
 			<h1>attention</h1>
 			<p>this is a dialog</p>
 			<button on:click={close}> ok </button>
@@ -108,7 +108,7 @@
 {/if}
 {#if dialog_overflowing_opened}
 	<Dialog let:close on:close={() => (dialog_overflowing_opened = false)}>
-		<div class="pane prose padded_xl">
+		<div class="pane prose padded_1">
 			<h1>attention</h1>
 			{#each {length: 120} as _}
 				<p>this is a dialog that overflows vertically</p>
@@ -123,7 +123,7 @@
 		let:close
 		layout={selected_layout}
 	>
-		<div class="pane prose padded_xl width_md">
+		<div class="pane prose padded_1 width_md">
 			<h1>attention</h1>
 			{#if selected_layout === 'page'}
 				<p>
@@ -172,7 +172,7 @@
 			{/each}
 			<hr />
 			<form class="box">
-				<div>
+				<div class="spaced">
 					{#each layouts as layout}
 						<label class="row">
 							<input type="radio" bind:group={selected_layout} value={layout} />
@@ -187,7 +187,7 @@
 {/if}
 {#if dialog_nested_1_opened}
 	<Dialog on:close={() => (dialog_nested_1_opened = false)}>
-		<div class="pane prose padded_xl">
+		<div class="pane prose padded_1">
 			<h1>dialog 1</h1>
 			<p>dialogs can open more dialogs</p>
 			<button on:click={() => (dialog_nested_2_opened = true)}>open another dialog</button>
@@ -196,7 +196,7 @@
 {/if}
 {#if dialog_nested_2_opened}
 	<Dialog on:close={() => (dialog_nested_2_opened = false)}>
-		<div class="pane prose padded_xl">
+		<div class="pane prose padded_1">
 			<h1>dialog 2</h1>
 			<p>this dialog can open more dialogs</p>
 			<p>this is the second dialog</p>
@@ -206,11 +206,11 @@
 {/if}
 {#if dialog_nested_3_opened}
 	<Dialog on:close={() => (dialog_nested_3_opened = false)}>
-		<div class="pane prose padded_xl" style:margin-bottom="var(--spacing_xl3)">
+		<div class="pane prose padded_1" style:margin-bottom="var(--spacing_3)">
 			<h1>3 dialogs!</h1>
 			<button on:click={() => (dialog_nested_3_opened = false)}>close dialog</button>
 		</div>
-		<div class="pane prose padded_xl">
+		<div class="pane prose padded_1">
 			<h1>and another <code>.pane</code></h1>
 			<button
 				on:click={() => {
