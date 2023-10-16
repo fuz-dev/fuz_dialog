@@ -3,7 +3,7 @@ import type {PackageJson} from '@grogarden/gro/package_json.js';
 export const package_json = {
 	name: '@fuz.dev/fuz_dialog',
 	description: 'dialog component for Svelte with Fuz',
-	version: '0.3.0',
+	version: '0.3.1',
 	license: 'MIT',
 	type: 'module',
 	homepage: 'https://dialog.fuz.dev/',

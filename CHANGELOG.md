@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_dialog
 
+## 0.3.1
+
+### Patch Changes
+
+- 2ed0029: publish $lib/package.ts
+
 ## 0.3.0
 
 ### Minor Changes
