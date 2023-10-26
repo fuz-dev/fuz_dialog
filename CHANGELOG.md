@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_dialog
 
+## 0.3.2
+
+### Patch Changes
+
+- c5bde1f: upgrade gro to fix svelte default imports
+
 ## 0.3.1
 
 ### Patch Changes
