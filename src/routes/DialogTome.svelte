@@ -2,7 +2,7 @@
 	import {slide} from 'svelte/transition';
 	import {writable} from 'svelte/store';
 	import Alert from '@fuz.dev/fuz_library/Alert.svelte';
-	import TomeDetails from '@fuz.dev/fuz_library/TomeDetails.svelte';
+	import TomeDetail from '@fuz.dev/fuz_library/TomeDetail.svelte';
 	import {get_tome} from '@fuz.dev/fuz_library/tome.js';
 	// TODO hack why is this needed? it's imported in the `Code` component
 	// but it needs to be imported before the next line,
@@ -58,7 +58,7 @@
 	};
 </script>
 
-<TomeDetails {tome}>
+<TomeDetail {tome}>
 	<div slot="header"><h2>{tome.name}</h2></div>
 	<div class="prose box width_full">
 		<Code
@@ -96,7 +96,7 @@
 		<button on:click={() => add_dialogs(5)}>open many dialogs</button>
 		<hr />
 	</div>
-</TomeDetails>
+</TomeDetail>
 {#if opened}
 	<Dialog let:close on:close={() => (opened = false)}>
 		<div class="pane prose padded_1 box">

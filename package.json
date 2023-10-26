@@ -32,13 +32,13 @@
   "devDependencies": {
     "@changesets/changelog-git": "^0.1.14",
     "@feltjs/eslint-config": "^0.4.1",
-    "@fuz.dev/fuz": "^0.73.0",
+    "@fuz.dev/fuz": "^0.75.2",
     "@fuz.dev/fuz_code": "^0.3.1",
-    "@fuz.dev/fuz_library": "^0.11.1",
-    "@grogarden/gro": "^0.96.0",
+    "@fuz.dev/fuz_library": "^0.12.3",
+    "@grogarden/gro": "^0.96.1",
     "@grogarden/util": "^0.15.2",
     "@sveltejs/adapter-static": "^2.0.3",
-    "@sveltejs/kit": "^1.27.0",
+    "@sveltejs/kit": "^1.27.1",
     "@sveltejs/package": "^2.2.2",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
@@ -78,6 +78,7 @@
   "exports": {
     "./Dialog.svelte": {
       "svelte": "./dist/Dialog.svelte",
+      "default": "./dist/Dialog.svelte",
       "types": "./dist/Dialog.svelte.d.ts"
     },
     "./dialog.js": {
@@ -86,6 +87,7 @@
     },
     "./Dialogs.svelte": {
       "svelte": "./dist/Dialogs.svelte",
+      "default": "./dist/Dialogs.svelte",
       "types": "./dist/Dialogs.svelte.d.ts"
     },
     "./package.gen.js": {
