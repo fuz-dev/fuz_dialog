@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_dialog
 
+## 0.4.1
+
+### Patch Changes
+
+- 8a435ab: upgrade gro to fix `package.ts`
+
 ## 0.4.0
 
 ### Minor Changes
