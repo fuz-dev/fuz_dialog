@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_dialog
 
+## 0.4.2
+
+### Patch Changes
+
+- 449b810: add `"public": true,` to `package.json`
+
 ## 0.4.1
 
 ### Patch Changes
