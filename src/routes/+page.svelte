@@ -3,6 +3,7 @@
 	import LibraryFooter from '@fuz.dev/fuz_library/LibraryFooter.svelte';
 	import {set_tomes} from '@fuz.dev/fuz_library/tome.js';
 	import {parse_package_meta} from '@fuz.dev/fuz_library/package_meta.js';
+	import {base} from '$app/paths';
 
 	import DialogTome from '$routes/DialogTome.svelte';
 	import {tomes} from '$routes/tomes.js';
@@ -21,6 +22,9 @@
 		<section>
 			<DialogTome />
 		</section>
+		<section class="box">
+			<a href="{base}/about" class="chip">about</a>
+		</section>
 		<section>
 			<LibraryFooter {pkg} root_url="https://www.fuz.dev/" />
 		</section>
@@ -29,11 +33,12 @@
 
 <style>
 	main {
+		/* TODO hacky */
 		margin-bottom: var(--spacing_5);
+		padding: var(--spacing_3) 0;
 	}
 	section {
-		margin-top: var(--spacing_3);
-		margin-bottom: var(--spacing_3);
+		margin-bottom: var(--spacing_5);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
