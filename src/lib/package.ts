@@ -24,16 +24,16 @@ export const package_json = {
 	devDependencies: {
 		'@changesets/changelog-git': '^0.1.14',
 		'@feltjs/eslint-config': '^0.4.1',
-		'@fuz.dev/fuz': '^0.76.0',
-		'@fuz.dev/fuz_code': '^0.3.2',
-		'@fuz.dev/fuz_library': '^0.16.0',
-		'@grogarden/gro': '^0.97.0',
+		'@fuz.dev/fuz': '^0.77.0',
+		'@fuz.dev/fuz_code': '^0.4.1',
+		'@fuz.dev/fuz_library': '^0.16.2',
+		'@grogarden/gro': '^0.98.1',
 		'@grogarden/util': '^0.15.2',
 		'@sveltejs/adapter-static': '^2.0.3',
-		'@sveltejs/kit': '^1.27.1',
+		'@sveltejs/kit': '^1.27.2',
 		'@sveltejs/package': '^2.2.2',
-		'@typescript-eslint/eslint-plugin': '^6.9.0',
-		'@typescript-eslint/parser': '^6.9.0',
+		'@typescript-eslint/eslint-plugin': '^6.9.1',
+		'@typescript-eslint/parser': '^6.9.1',
 		eslint: '^8.52.0',
 		'eslint-plugin-svelte': '^2.34.0',
 		prettier: '^3.0.3',
@@ -71,6 +71,7 @@ export const package_json = {
 		'./package.js': {default: './dist/package.js', types: './dist/package.d.ts'},
 	},
 	modules: {
+		'./Dialog.svelte': {path: 'Dialog.svelte', declarations: []},
 		'./dialog.js': {
 			path: 'dialog.ts',
 			declarations: [
@@ -80,6 +81,7 @@ export const package_json = {
 				{name: 'dialog_layouts', kind: 'VariableDeclaration'},
 			],
 		},
+		'./Dialogs.svelte': {path: 'Dialogs.svelte', declarations: []},
 		'./package.gen.js': {path: 'package.gen.ts', declarations: []},
 		'./package.js': {
 			path: 'package.ts',
