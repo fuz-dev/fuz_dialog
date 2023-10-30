@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_dialog
 
+## 0.4.0
+
+### Minor Changes
+
+- dbf9934: upgrade deps
+
 ## 0.3.2
 
 ### Patch Changes
