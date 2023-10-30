@@ -1,0 +1,147 @@
+{
+  "name": "@fuz.dev/fuz_dialog",
+  "description": "dialog component for Svelte with Fuz",
+  "version": "0.4.2",
+  "public": true,
+  "license": "MIT",
+  "homepage": "https://dialog.fuz.dev/",
+  "repository": "https://github.com/fuz-dev/fuz_dialog",
+  "author": {
+    "name": "Ryan Atkinson",
+    "email": "mail@ryanatkn.com",
+    "url": "https://www.ryanatkn.com/"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20.7"
+  },
+  "scripts": {
+    "start": "gro dev",
+    "dev": "gro dev",
+    "build": "gro build",
+    "test": "gro test",
+    "deploy": "gro deploy"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "@fuz.dev/fuz_library": "*",
+    "@grogarden/util": "*",
+    "svelte": "*"
+  },
+  "devDependencies": {
+    "@changesets/changelog-git": "^0.1.14",
+    "@feltjs/eslint-config": "^0.4.1",
+    "@fuz.dev/fuz": "^0.77.1",
+    "@fuz.dev/fuz_code": "^0.4.2",
+    "@fuz.dev/fuz_library": "^0.17.0",
+    "@grogarden/gro": "^0.98.1",
+    "@grogarden/util": "^0.15.2",
+    "@sveltejs/adapter-static": "^2.0.3",
+    "@sveltejs/kit": "^1.27.2",
+    "@sveltejs/package": "^2.2.2",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
+    "eslint": "^8.52.0",
+    "eslint-plugin-svelte": "^2.34.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-svelte": "^3.0.3",
+    "prism-svelte": "^0.5.0",
+    "prismjs": "^1.29.0",
+    "svelte": "^4.2.2",
+    "svelte-check": "^3.5.2",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "uvu": "^0.5.6"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": "@feltjs"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-svelte"
+    ],
+    "useTabs": true,
+    "printWidth": 100,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "overrides": [
+      {
+        "files": "package.json",
+        "options": {
+          "useTabs": false
+        }
+      }
+    ]
+  },
+  "exports": {
+    "./Dialog.svelte": {
+      "svelte": "./dist/Dialog.svelte",
+      "default": "./dist/Dialog.svelte",
+      "types": "./dist/Dialog.svelte.d.ts"
+    },
+    "./dialog.js": {
+      "default": "./dist/dialog.js",
+      "types": "./dist/dialog.d.ts"
+    },
+    "./Dialogs.svelte": {
+      "svelte": "./dist/Dialogs.svelte",
+      "default": "./dist/Dialogs.svelte",
+      "types": "./dist/Dialogs.svelte.d.ts"
+    },
+    "./package.gen.js": {
+      "default": "./dist/package.gen.js",
+      "types": "./dist/package.gen.d.ts"
+    },
+    "./package.js": {
+      "default": "./dist/package.js",
+      "types": "./dist/package.d.ts"
+    }
+  },
+  "modules": {
+    "./Dialog.svelte": {
+      "path": "Dialog.svelte",
+      "declarations": []
+    },
+    "./dialog.js": {
+      "path": "dialog.ts",
+      "declarations": [
+        {
+          "name": "to_dialog_params",
+          "kind": "VariableDeclaration"
+        },
+        {
+          "name": "DialogParams",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "DialogLayout",
+          "kind": "TypeAliasDeclaration"
+        },
+        {
+          "name": "dialog_layouts",
+          "kind": "VariableDeclaration"
+        }
+      ]
+    },
+    "./Dialogs.svelte": {
+      "path": "Dialogs.svelte",
+      "declarations": []
+    },
+    "./package.gen.js": {
+      "path": "package.gen.ts",
+      "declarations": []
+    },
+    "./package.js": {
+      "path": "package.ts",
+      "declarations": [
+        {
+          "name": "package_json",
+          "kind": "VariableDeclaration"
+        }
+      ]
+    }
+  }
+}
