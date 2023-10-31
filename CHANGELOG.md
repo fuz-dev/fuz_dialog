@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_dialog
 
+## 0.5.0
+
+### Minor Changes
+
+- 7d44c1b: rename to `Proper_Snakes`
+
 ## 0.4.2
 
 ### Patch Changes
