@@ -21,12 +21,7 @@ export const package_json = {
 		deploy: 'gro deploy',
 	},
 	files: ['dist'],
-	peerDependencies: {
-		'@fuz.dev/fuz_library': '*',
-		'@grogarden/gro': '*',
-		'@grogarden/util': '*',
-		svelte: '*',
-	},
+	peerDependencies: {'@fuz.dev/fuz_library': '*', '@grogarden/util': '*', svelte: '*'},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.1.14',
 		'@feltjs/eslint-config': '^0.4.1',
