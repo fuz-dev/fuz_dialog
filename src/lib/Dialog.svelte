@@ -3,7 +3,7 @@
 	import {is_editable, swallow} from '@grogarden/util/dom.js';
 	import Teleport from '@fuz.dev/fuz_library/Teleport.svelte';
 
-	import type {DialogLayout} from '$lib/dialog';
+	import type {Dialog_Layout} from '$lib/dialog.js';
 
 	/*
 
@@ -26,7 +26,7 @@
 	const dispatch = createEventDispatcher<{close: undefined}>();
 
 	export let container: HTMLElement | undefined = undefined;
-	export let layout: DialogLayout = 'centered';
+	export let layout: Dialog_Layout = 'centered';
 	export let index = 0; // index 0 is under 1 is under 2 etc -- the topmost dialog is the last in the array
 	export let active = true;
 
@@ -100,19 +100,19 @@
 	on:move={() => {
 		// Measure `padding-right` before adding the class that changes it,
 		// so we can set the body padding to offset any scrollbar width changes.
-		const computedPaddingRight =
+		const computed_padding_right =
 			Number(
 				window.getComputedStyle(document.body).getPropertyValue('padding-right').slice(0, -2),
 			) || 0; // just in case the parsed value is NaN
-		const widthBefore = document.body.clientWidth;
+		const width_before = document.body.clientWidth;
 		document.body.classList.add(ROOT_DIALOG_OPEN_CLASS);
-		const widthAfter = document.body.clientWidth;
-		const widthDiff = widthAfter - widthBefore;
-		if (widthDiff > 0) {
+		const width_after = document.body.clientWidth;
+		const width_diff = width_after - width_before;
+		if (width_diff > 0) {
 			// Offset scrollbar width changes.
 			document.body.style.setProperty(
 				ROOT_DIALOG_PADDING_PROPERTY,
-				widthDiff + computedPaddingRight + 'px',
+				width_diff + computed_padding_right + 'px',
 			);
 		}
 		ready = true;

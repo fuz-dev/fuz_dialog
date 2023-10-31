@@ -2,7 +2,7 @@
 	import {slide} from 'svelte/transition';
 	import {writable} from 'svelte/store';
 	import Alert from '@fuz.dev/fuz_library/Alert.svelte';
-	import TomeDetail from '@fuz.dev/fuz_library/TomeDetail.svelte';
+	import Tome_Detail from '@fuz.dev/fuz_library/Tome_Detail.svelte';
 	import {get_tome} from '@fuz.dev/fuz_library/tome.js';
 	// TODO hack why is this needed? it's imported in the `Code` component
 	// but it needs to be imported before the next line,
@@ -14,10 +14,10 @@
 	import Dialogs from '$lib/Dialogs.svelte';
 	import {
 		dialog_layouts,
-		type DialogParams,
-		type DialogLayout,
+		type Dialog_Params,
+		type Dialog_Layout,
 		to_dialog_params,
-	} from '$lib/dialog';
+	} from '$lib/dialog.js';
 	import Text from '$routes/Text.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Dialog';
@@ -31,8 +31,8 @@
 	let dialog_nested_2_opened = false;
 	let dialog_nested_3_opened = false;
 
-	let selected_layout: DialogLayout = 'page';
-	const layouts: DialogLayout[] = ['centered', 'page'];
+	let selected_layout: Dialog_Layout = 'page';
+	const layouts: Dialog_Layout[] = ['centered', 'page'];
 
 	let items: object[] = [];
 	const remove_item = (item: object) => {
@@ -45,7 +45,7 @@
 		items = [];
 	};
 
-	const dialogs = writable([] as DialogParams[]);
+	const dialogs = writable([] as Dialog_Params[]);
 	const add_dialogs = (count: number) => {
 		const to_text = (index: number) => '!'.repeat(count * 3 - index * 3);
 		$dialogs = Array.from({length: count}, (_, i) =>
@@ -58,7 +58,7 @@
 	};
 </script>
 
-<TomeDetail {tome}>
+<Tome_Detail {tome}>
 	<div slot="header"><h2>{tome.name}</h2></div>
 	<div class="prose box width_full">
 		<Code
@@ -96,7 +96,7 @@
 		<button on:click={() => add_dialogs(5)}>open many dialogs</button>
 		<hr />
 	</div>
-</TomeDetail>
+</Tome_Detail>
 {#if opened}
 	<Dialog let:close on:close={() => (opened = false)}>
 		<div class="pane prose padded_1 box">

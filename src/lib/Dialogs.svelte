@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type {Readable} from 'svelte/store';
 
-	import type {DialogParams} from '$lib/dialog';
+	import type {Dialog_Params} from '$lib/dialog.js';
 	import Dialog from '$lib/Dialog.svelte';
 
 	// TODO this is experimental
 
-	export let dialogs: Readable<DialogParams[]>;
+	export let dialogs: Readable<Dialog_Params[]>;
 </script>
 
 {#each $dialogs as dialog, index (dialog)}

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import LibraryHeader from '@fuz.dev/fuz_library/LibraryHeader.svelte';
-	import LibraryFooter from '@fuz.dev/fuz_library/LibraryFooter.svelte';
+	import Library_Header from '@fuz.dev/fuz_library/Library_Header.svelte';
+	import Library_Footer from '@fuz.dev/fuz_library/Library_Footer.svelte';
 	import {set_tomes} from '@fuz.dev/fuz_library/tome.js';
 	import {parse_package_meta} from '@fuz.dev/fuz_library/package_meta.js';
 	import {base} from '$app/paths';
 
-	import DialogTome from '$routes/DialogTome.svelte';
+	import Dialog_Tome from '$routes/Dialog_Tome.svelte';
 	import {tomes} from '$routes/tomes.js';
 	import {package_json} from '$lib/package.js';
 
@@ -17,16 +17,16 @@
 <main class="box width_full">
 	<div class="box width_md">
 		<section>
-			<LibraryHeader {pkg} />
+			<Library_Header {pkg} />
 		</section>
 		<section>
-			<DialogTome />
+			<Dialog_Tome />
 		</section>
 		<section class="box">
 			<a href="{base}/about" class="chip">about</a>
 		</section>
 		<section>
-			<LibraryFooter {pkg} root_url="https://www.fuz.dev/" />
+			<Library_Footer {pkg} root_url="https://www.fuz.dev/" />
 		</section>
 	</div>
 </main>
