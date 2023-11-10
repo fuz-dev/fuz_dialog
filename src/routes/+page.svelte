@@ -7,9 +7,9 @@
 
 	import Dialog_Tome from '$routes/Dialog_Tome.svelte';
 	import {tomes} from '$routes/tomes.js';
-	import {package_json} from '$lib/package.js';
+	import {package_json, src_json} from '$lib/package.js';
 
-	const pkg = parse_package_meta(package_json.homepage, package_json);
+	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 
 	set_tomes(new Map(tomes.map((t) => [t.name, t])));
 </script>
