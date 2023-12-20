@@ -34,7 +34,7 @@
 
 ### Patch Changes
 
-- 2ed0029: publish $lib/package.ts
+- 2ed0029: publish $routes/package.ts
 
 ## 0.3.0
 
