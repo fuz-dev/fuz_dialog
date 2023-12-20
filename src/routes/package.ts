@@ -6,7 +6,7 @@ import type {Src_Json} from '@grogarden/gro/src_json.js';
 export const package_json = {
 	name: '@fuz.dev/fuz_dialog',
 	description: 'dialog component for Svelte with Fuz',
-	version: '0.5.0',
+	version: '0.6.0',
 	public: true,
 	license: 'MIT',
 	homepage: 'https://dialog.fuz.dev/',
@@ -75,7 +75,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@fuz.dev/fuz_dialog',
-	version: '0.5.0',
+	version: '0.6.0',
 	modules: {
 		'./Dialog.svelte': {path: 'Dialog.svelte', declarations: []},
 		'./dialog.js': {
