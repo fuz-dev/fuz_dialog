@@ -7,7 +7,7 @@
 
 	import Dialog_Tome from '$routes/Dialog_Tome.svelte';
 	import {tomes} from '$routes/tomes.js';
-	import {package_json, src_json} from '$lib/package.js';
+	import {package_json, src_json} from '$routes/package.js';
 
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 

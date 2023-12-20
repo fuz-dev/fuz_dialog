@@ -1,6 +1,6 @@
 {
   "name": "@fuz.dev/fuz_dialog",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "modules": {
     "./Dialog.svelte": {
       "path": "Dialog.svelte",
@@ -30,23 +30,6 @@
     "./Dialogs.svelte": {
       "path": "Dialogs.svelte",
       "declarations": []
-    },
-    "./package.gen.js": {
-      "path": "package.gen.ts",
-      "declarations": []
-    },
-    "./package.js": {
-      "path": "package.ts",
-      "declarations": [
-        {
-          "name": "package_json",
-          "kind": "variable"
-        },
-        {
-          "name": "src_json",
-          "kind": "variable"
-        }
-      ]
     }
   }
 }
